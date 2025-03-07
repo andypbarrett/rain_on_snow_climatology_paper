@@ -1,12 +1,52 @@
 ---
 title: A Climatology of Arctic Rain on Snow and Winter Rain Events
 authors:
-  - name: Norah Jones
-    affiliation: The University
-    roles: writing
+  - name: Andrew P. Barrett
+    id: apb
+    orcid: 0000-0003-4394-5445
+    email: andrew.barrett@colorado.edu
+    affiliation:
+      - id: nsidc
+        name: National Snow and Ice Data Center
+        address: University of Colorado at Boulder
+        city: Boulder
+        state: CO
+        country: USA
+    roles:
+      conceptualization: supporting
+      data curation: lead
+      formal analysis: lead
+      writing: lead
+      software: lead
     corresponding: true
+  - name: Mark C. Serreze
+    id: mcs
+    orcid: 0000-0001-7670-0140
+    email: mark.serreze@colorado.edu
+    affiliation:
+      - ref: nsidc
+    roles: 
+      conceptualization: lead
+      writing: supporting
+      funding acquisition: lead  
 bibliography: references.bib
+abstract: >
+  This study covers everything...
+license: "CC-BY"
+funding: "NSF"
 ---
 
-## Section
+## Introduction
 This is a simple placeholder for the manuscript's main document [@knuth84].
+
+
+## Data
+
+
+## Analysis
+
+
+## Discussion
+
+
+## Conclusions
