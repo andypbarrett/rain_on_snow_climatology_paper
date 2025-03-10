@@ -7,7 +7,8 @@ the climatology of rain on snow and winter rain events in the Arctic.
 
 ## Installation
 ```
-git clone <repo-name>
+git clone git@github.com:andypbarrett/rain_on_snow_climatology_paper.git
+```
 
 ## Contributing Workflow
 
