@@ -1,0 +1,32 @@
+name: ros-climatology-paper
+channels:
+ - conda-forge
+ - default
+dependencies:
+ - python ~=3.12
+
+ ###################################################
+ # Imported dependencies and extensions            #
+ ###################################################
+
+ # Jupyterlab for notebooks
+ - jupyterlab
+
+ # Plotting
+ - matplotlib
+ - cartopy
+
+ # xarray
+ - xarray
+ - netCDF4
+ - dask
+ - bottleneck
+ - rioxarray
+
+ # pandas and geopandas
+ - pandas
+ - geopandas
+
+ # Documents
+ - quarto
+ 
