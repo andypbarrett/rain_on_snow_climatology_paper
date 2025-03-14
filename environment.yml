@@ -15,6 +15,7 @@ dependencies:
  # Plotting
  - matplotlib
  - cartopy
+ - cmocean
 
  # xarray
  - xarray
