@@ -128,4 +128,7 @@ def to_daily_climatology(df: pd.DataFrame):
                                 if key in df_day}
     df_clim = df_day.groupby(df_day.index.dayofyear).agg(climatology_agg_rules)
 
+    df_clim["p_liquid"] = event_frequency_climatology(df_day.LIQUID)
+    df_clim["p_solid"] = event_frequency_climatology(df_day.SOLID)
+    
     return pd.concat([df_clim, t2m_quantile], axis=1)
