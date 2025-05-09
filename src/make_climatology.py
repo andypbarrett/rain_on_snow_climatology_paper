@@ -47,13 +47,15 @@ def make_climatology(fp):
 
 def run_all_stations():
 
-    stid = "PANC"
-    filelist = list(SURFOBS_COMBINED_PATH.glob(f"{stid}*.csv"))
-    
-    for fp in filelist:
+    for stid in long_term_stations[:5]:
+
+        print(f"Getting climatology for {stid}")
+        
+        fp = list(SURFOBS_COMBINED_PATH.glob(f"{stid}*.csv"))[0]
+
         df_clim = make_climatology(fp)
         print(df_clim.head())
 
-    
+
 if __name__ == "__main__":
     run_all_stations()
