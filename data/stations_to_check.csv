@@ -1,0 +1,244 @@
+# pixel location is based on mask
+
+BGAA Tricky because many islands, look at time series of larger extent
+BGBW land pixel
+BGCO land pixel
+BGGH sea pixel
+BGJN sea pixel
+BGKK land pixel
+BGMQ sea pixel - island
+BGPT sea pixel
+BGQQ sea pixel but only just
+BGSF land pixel
+BGSS land but misclassified sea pixels - islands complex - check with image
+BGTL Thule! sea pixel
+BGUK sea pixel
+BGUQ land pixel
+BIAR land pixel
+BIEG inland on misclassified sea pixel
+BIKF land pixel
+BIRK land pixel
+CWEU sea pixel and point not on land, Eureka
+CWGZ land pixel but just
+CYAB sea pixel
+CYBB land pixel
+CYBK lake pixel - location in lake
+CYCB sea pixel
+CYCO sea pixel
+CYCS land pixel
+CYCY land pixel but IMS mask shifted
+CYDA land pixel
+CYDB land pixel
+CYDP land pixel but location in sea on coastline mask
+CYEK land pixel
+CYEV land pixel
+CYFB land pixel
+CYFS land pixel
+CYGT sea pixel
+CYHK sea pixel
+CYHY land pixel
+CYIO land pixel
+CYKD land pixel
+CYLC land pixel
+CYLK lake pixel - location in lake from Google Maps (62.41677812853832, -110.68988264300768) not very different
+CYLT sea pixel
+CYMA land pixel
+CYOC land pixel
+CYPC sea pixel
+CYPH land pixel
+CYPX sea pixel
+CYQH land pixel
+CYRA lake pixel
+CYRB land pixel
+CYRT sea pixel - 2 4km pixels from nearest land
+CYSM land pixel
+CYSY land pixel
+CYTE sea pixel
+CYUB sea pixel
+CYUT sea pixel
+CYUX land pixel or edge of sea pixel
+CYVL land pixel
+CYVM land pixel
+CYVP land pixel
+CYVQ land pixel but location in lake - Norman Wells (Google Maps: 65.2781661294921, -126.79304875560027)
+CYWE lake pixel marked as sea ice
+CYXP sea pixel
+CYXY land pixel
+CYYH land pixel
+CYYR land pixel
+CYZF land pixel
+CYZS land pixel
+CYZW lake pixel
+CZFA land pixel
+CZFM land pixel
+EFET land pixel
+EFHA land pixel
+EFHK land pixel
+EFIV land pixel
+EFJY land pixel
+EFKE land pixel
+EFKI lake pixel
+EFKK land pixel
+EFKS land pixel but location in lake, Google Maps show only small lakes
+EFKT land pixel
+EFKU lake pixel
+EFLP lake pixel
+EFMA land pixel
+EFMI land pixel
+EFOU land pixel
+EFPO land pixel
+EFRO land pixel
+EFSA land pixel
+EFSI land pixel
+EFTU land pixel
+EFUT lake pixel
+EFVA land pixel
+ENAL sea pixel - good example of islands and complexity
+ENAN sea pixel
+ENAT sea pixel - close to coast and would be defined as sea in 4 km grid
+ENBN land pixel
+ENBO sea pixel - would be sea in 4 km grid
+ENBR land pixel
+ENBS land pixel
+ENBV sea pixel
+ENDU land pixel
+ENEV land pixel
+ENFL sea pixel
+ENHF land pixel
+ENHK sea pixel - would be sea in 4 km grid
+ENKB land pixel
+ENKR sea pixel - narrow fjords
+ENMH sea pixel - would be sea in 1 km grid
+ENML sea pixel
+ENNA sea pixel
+ENOL sea pixel
+ENRO land pixel
+ENSB sea pixel
+ENSK land pixel
+ENSR land pixel
+ENSS land pixel
+ENTC sea pixel
+ENVA sea pixel
+ESCM land pixel
+ESKM land pixel
+ESND land pixel
+ESNG land pixel
+ESNK land pixel
+ESNL land pixel
+ESNN sea pixel
+ESNO land pixel
+ESNQ land pixel
+ESNS land pixel
+ESNU land pixel
+ESNX land pixel
+ESNZ land pixel but lake in shapefile
+ESOW lake pixel
+ESPA land pixel
+ESPE land pixel
+ESSA land pixel
+ESSD land pixel
+ESST land pixel
+ESUD land pixel
+ESUP land pixel
+ESUT land pixel
+PAAD land pixel
+PAAQ land pixel
+PABE land pixel
+PABI land pixel
+PABL land pixel
+PABR land pixel
+PABT land pixel
+PABV land pixel - first evidence of 1 km resolution
+PACM sea pixel
+PACV land pixel
+PADE land pixel
+PADM land pixel
+PADQ sea pixel
+PAEG land pixel
+PAEI land pixel
+PAEN land pixel
+PAFA land pixel
+PAFM land pixel
+PAFM land pixel
+PAFS land pixel
+PAGA land pixel
+PAGH land pixel
+PAGK land pixel
+PAGL sea pixel
+PAHL land pixel
+PAHX land pixel
+PAIK land pixel
+PAIM land pixel
+PAIN land pixel - Denali (McKinley Park)
+PAIW sea pixel Wales
+PAKK land pixel
+PAKN land pixel
+PAKP land pixel
+PAKV land pixel
+PALG land pixel
+PALP land pixel
+PAMC land pixel
+PAMH lake pixel
+PAMO land pixel
+PAMY land pixel
+PANA sea pixel on Kuskokwim river about 1 km
+PANC sea pixel - snow next to sea Anchorage
+PANN land pixel
+PANV land pixel - on lake edge
+PAOM sea pixel
+PAOO sea pixel - also snow, land and sea ice
+PAOR land pixel
+PAOT sea pixel - Kotzebue complicated spit
+PAQT land pixel
+PARC land pixel
+PARS land pixel but in lake polygon
+PARY land pixel
+PASA land pixel 
+PASC land pixel
+PASK land pixel
+PASL land pixel
+PASV land pixel
+PASX land pixel
+PATA land pixel
+PATE land pixel
+PATK land pixel
+PAVA land pixel
+PAVD land pixel
+PAWD land pixel
+PAWM land pixel
+PAWN land pixel
+PAWR land pixel but on coast
+PAWS land pixel
+PAYA land pixel
+PAZA land pixel
+PFKW land pixel
+PFNO land pixel
+PFSH sea pixel - on spit
+PFYU land pixel
+PPIZ sea pixel
+UEEE land pixel
+UERP land pixel
+UERR land pixel
+UESO land pixel
+UEST sea pixel Tiksi
+UHMA land pixel
+UHMD land pixel
+UHMM land pixel  Magadan is on the coast?
+UHMP land pixel but close to coastline
+ULAA land pixel but in lake
+ULKK land pixel
+ULMM land pixel
+ULPB land pixel
+UOHH land pixel
+UOII lake pixel, station in lake
+UOOO land pixel
+USDD land pixel
+USHH land pixel
+USMM land pixel
+USMU land pixel
+USNN land pixel
+USRK land pixel
+USRR land pixel but in lake
+UUYH land pixel
+UUYS land pixel
+UUYY land pixel
