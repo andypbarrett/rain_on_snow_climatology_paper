@@ -1,8 +1,24 @@
 """Plotting routines"""
+from typing import Union, Tuple, List, Dict
+
+import calendar
+import datetime as dt
 
 import pandas as pd
+import numpy as np
 
 import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
+import matplotlib as mpl
+
+
+def doy_month_ticks_and_labels(month_start=1, which="major", with_labels=True):
+    """Returns ticks and labels for months when axis is day-of-year"""
+    months = np.roll(np.arange(1,13), -1*(month_start-1))
+    ticks = np.cumsum([1]+[calendar.monthrange(2001,m)[1] for m in months])
+    minor_ticks = (ticks[:-1] + np.roll(ticks,-1)[:-1])*.5
+    labels = [calendar.month_abbr[m] for m in months]
+    return ticks, minor_ticks, labels
 
 
 def plot_climatology(df: pd.DataFrame, title: str=''):
@@ -14,12 +30,15 @@ def plot_climatology(df: pd.DataFrame, title: str=''):
     median_color = "k"
     tavg_color = "tab:blue"
 
+    last_day = df.t2m[df.t2m > 0.].index[0]
+    first_day = df.t2m[df.t2m > 0.].index[-1]
+    
     fig = plt.figure()
     gs = GridSpec(3, 1, height_ratios=[3, 2, 1], hspace=0)
 
     # Temperature Panel
     ax1 = fig.add_subplot(gs[0])
-    ax1.set_xlim(0,365)
+    ax1.set_xlim(1,365)
 
     # - quantiles
     for l, u, color in zip(["t2m_min", "t2m_10", "t2m_25"],
@@ -40,7 +59,7 @@ def plot_climatology(df: pd.DataFrame, title: str=''):
     ax2.tick_params(labelbottom = False, bottom=False, labelleft=False, left=False)
     ax2.set_ylim(0,1)
     ax2.set_ylabel("$P(Rain)$")
-    ax2.fill_between(df.index, dfp_liquid, color="0.3", alpha=0.5)
+    ax2.fill_between(df.index, df.p_liquid, color="0.3", alpha=0.5)
 
     ax2b = ax2.twinx()
     ax2b.set_ylim(1,0)
@@ -55,6 +74,16 @@ def plot_climatology(df: pd.DataFrame, title: str=''):
     ax3.set_ylabel("SOG (%)")
     ax3.tick_params(labelleft = False, left=False)
 
+    # Add ticks and labels to ax3
+    # - Make ticks and labels
+    doy = np.cumsum([1]+[calendar.monthrange(2004, m)[1] for m in range(1,13)])
+    doy[12] = doy[12]-1  # get last day of year
+    doy_label = (doy[:-1] + np.roll(doy, -1)[:-1])*0.5
+    # Add ticks and labels
+    ax3.set_xticks(ticks=doy, labels=[], )
+    ax3.set_xticks(ticks=doy_label, labels=calendar.month_abbr[1:], minor=True)
+    ax3.tick_params(which='minor', length=0)
+    
     # Add shading for winter on panels
     for axis in [ax1, ax2, ax3]:
         axis.axvspan(1, last_day, color=iswinter_color, zorder=0)
@@ -63,3 +92,86 @@ def plot_climatology(df: pd.DataFrame, title: str=''):
     if title:
         fig.suptitle(title)  #f"{station.loc[stid].station_name} ({stid})");
 
+    return fig
+
+
+def minmax_scaler(x):
+    """Minmax scaler for an array or pd.Series
+
+    Arguments
+    ---------
+    x : ndarray or pandas.Series of numeric type.
+
+    Returns
+    -------
+    object of same type or dimensions as x but scaled by min and max 
+    """
+    return (x - x.min()) / (x.max() - x.min())
+
+
+def heatmap(
+    df: pd.DataFrame,
+    country_order: bool=True,  # Make this a pd.Series of countries
+    ax: plt.Axes=None,
+    xlim: Tuple[dt.datetime]=(dt.datetime(1979,1,1), dt.datetime(2023,12,31)),
+    norm: bool=True,
+    cmap: Union[str,mpl.colormaps]="Greys",
+    aspect: Union[float,str]="auto",
+    cbar_kwargs: Dict=None,
+) -> plt.Axes:
+    """Plots a heatmap of stations.  Default is to plot in country order
+
+    Arguments
+    ---------
+    df : pandas.DataFrame containing a timeseries of counts for each station
+         ordered by country.
+    countries : pandas.Series of countries to apply order
+    ax : matplotlib.Axes instance.  If None, one is created.
+    norm : if True (default) then apply minmax scaling
+    cmap : colormap
+
+    Returns
+    -------
+    ?
+    """
+
+    if not cbar_kwargs:
+        cbar_kwargs = dict(
+            shrink=0.5, 
+            label="Observations per Month", 
+            # aspect=50,
+            pad=0.01,
+        )
+        
+    # y-ticks and -ticklabels for country order plots
+    yticks = [0, 53,  76,  90,  94, 120, 146, 169, 244]
+    ylabels = ['CA', 'FI', 'GL', 'IS', 'NO', 'RU', 'SE', 'US']
+
+    # Scale dataframe
+    df_scl = df.apply(minmax_scaler)
+
+    ntime, nstation = df_scl.shape
+    
+    ax.set_xlim(*xlim)
+    img = ax.imshow(df_scl.T.values,
+                    extent=[df_scl.index.min(), df_scl.index.max(),
+                            0, nstation],
+                    interpolation="none",
+                    origin="lower", 
+                    aspect=aspect,
+                    cmap=cmap)
+
+    # ax.set_yticks(np.arange(nstation)+0.5, ptype_count_scl.columns, fontsize=5);
+    ax.set_yticks(yticks)
+    ax.set_yticklabels([])
+    ax.set_yticks([(yticks[i]+yticks[i+1])*0.5 for i in range(len(yticks)-1)], minor=True)
+    ax.set_yticklabels(ylabels, fontsize=20, minor=True)
+    ax.tick_params('y', which="minor", length=0)
+    ax.tick_params('y', which="major", length=30)
+
+    ax.grid(which="major", axis="x")
+    ax.grid(which="major", axis="y", color='black')
+
+    ax.get_figure().colorbar(img, **cbar_kwargs);
+
+    return ax
