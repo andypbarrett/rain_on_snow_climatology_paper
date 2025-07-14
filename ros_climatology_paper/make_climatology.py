@@ -9,6 +9,8 @@ P(solid)
 P(sog)
 """
 
+from pathlib import Path
+
 from ros_database.filepath import SURFOBS_COMBINED_PATH
 
 from src.utils import ROSCombinedDataFrame, to_daily_climatology, event_frequency_climatology
@@ -45,17 +47,21 @@ def make_climatology(fp):
     
     return df_clim
 
-def run_all_stations():
+def run_all_stations(outdir='.'):
 
-    for stid in long_term_stations[:5]:
+    for stid in long_term_stations:
 
         print(f"Getting climatology for {stid}")
         
         fp = list(SURFOBS_COMBINED_PATH.glob(f"{stid}*.csv"))[0]
 
         df_clim = make_climatology(fp)
-        print(df_clim.head())
+
+        outpath = Path(outdir) / f"{stid}.climatology.csv"
+        print(f"    ...writing climatology to {outpath}")
+        df_clim.to_csv(outpath)
 
 
 if __name__ == "__main__":
-    run_all_stations()
+    outdir = "./data/"
+    run_all_stations(outdir=outdir)
