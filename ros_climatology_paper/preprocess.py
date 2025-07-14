@@ -27,9 +27,12 @@ def is_file_current(filepath: Path, db_creation_time) -> bool:
     --------
     filepath : path to file to be checked
     """
-    return os.path.getctime(filepath) >= db_creation_time
+    if filepath.exists():
+        return os.path.getctime(filepath) >= db_creation_time
+    else:
+        return False
 
-    
+
 def get_stid(fname):
     """Get station-id from filepath"""
     return fname.name.split(".")[0]
@@ -124,4 +127,5 @@ def make_ptype_count(
                              for stid, fpath in station_files().items()], axis=1)
     df = df.resample("MS").sum().astype(float)  # count monthly occurrances
     df = df.sort_index(axis=1)  # Sort column index for nice plotting
-    return df
+    df.to_csv(outfile)
+    return
