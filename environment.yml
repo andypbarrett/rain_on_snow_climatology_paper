@@ -30,7 +30,8 @@ dependencies:
 
  # Documents
  - quarto
-
+ - nbdime
+ 
  - pip
  - pip:
      - /home/apbarret/src/rain_on_snow_database
