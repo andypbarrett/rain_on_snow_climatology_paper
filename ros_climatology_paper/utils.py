@@ -132,3 +132,11 @@ def to_daily_climatology(df: pd.DataFrame):
     df_clim["p_solid"] = event_frequency_climatology(df_day.SOLID)
     
     return pd.concat([df_clim, t2m_quantile], axis=1)
+
+
+def get_station_path(stid):
+    return list(SURFOBS_COMBINED_PATH.glob(f"{stid}*.csv"))[0]
+
+
+def get_long_term_station_paths():
+    return
