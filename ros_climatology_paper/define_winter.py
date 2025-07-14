@@ -93,7 +93,7 @@ def get_winter_one_station(fp, verbose=False):
     pt_begin, pt_end, pt_record_days, pt_nvalid_pc = get_por(df_day[["RA","FZRA","SOLID","UP"]].notnull().all(axis=1))
     sog_begin, sog_end, sog_record_days, sog_nvalid_pc = get_por(df_day.sog.notnull())
 
-    if df_day.index[0] > "1a
+    # if df_day.index[0] > "1a
     _, _, _, t2m_nvalid_1979_pc = get_por(df_day["1979":"2022"].t2m.notnull())
 
     result["t2m_begin"] = t2m_begin

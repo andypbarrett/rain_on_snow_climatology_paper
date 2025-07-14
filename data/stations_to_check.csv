@@ -22,8 +22,8 @@ CWEU sea pixel and point not on land, Eureka
 CWGZ land pixel but just
 CYAB sea pixel
 CYBB land pixel
-CYBK lake pixel - location in lake
-CYCB sea pixel
+CYBK lake pixel - location in lake - gshhs is also lake
+CYCB sea pixel - gshhs is land
 CYCO sea pixel
 CYCS land pixel
 CYCY land pixel but IMS mask shifted
@@ -41,7 +41,7 @@ CYIO land pixel
 CYKD land pixel
 CYLC land pixel
 CYLK lake pixel - location in lake from Google Maps (62.41677812853832, -110.68988264300768) not very different
-CYLT sea pixel
+CYLT sea pixel - land in gshhs
 CYMA land pixel
 CYOC land pixel
 CYPC sea pixel
@@ -188,7 +188,7 @@ PANV land pixel - on lake edge
 PAOM sea pixel
 PAOO sea pixel - also snow, land and sea ice
 PAOR land pixel
-PAOT sea pixel - Kotzebue complicated spit
+PAOT sea pixel - Kotzebue complicated spit - land in gshhs land mask
 PAQT land pixel
 PARC land pixel
 PARS land pixel but in lake polygon
@@ -215,7 +215,7 @@ PFKW land pixel
 PFNO land pixel
 PFSH sea pixel - on spit
 PFYU land pixel
-PPIZ sea pixel
+PPIZ sea pixel - land in gshhs
 UEEE land pixel
 UERP land pixel
 UERR land pixel
@@ -242,3 +242,6 @@ USRR land pixel but in lake
 UUYH land pixel
 UUYS land pixel
 UUYY land pixel
+
+## New locations
+Nain Airport 56.548736980414, -61.685385005363194 - from Google Maps
