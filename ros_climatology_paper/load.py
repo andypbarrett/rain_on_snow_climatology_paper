@@ -53,23 +53,31 @@ def get_filepath(station_id: str, filetype: str="combined") -> Path:
     -------
     Path object
     """
+    filetypes = ["raw", "clean", "hourly", "combined", "events"]
+    if not filetype in filetypes:
+        raise ValueError(f"Invalid filetype. Expected one of {', '.join(filetypes)}, "
+                         f"got {filetype} instead")
+    
     try:
-        return next(HOURLY_DATA_PATH.glob(f"{station_id}.*"))
+        return next((DATABASE_PATH / filetype).glob(f"{station_id}.*"))
     except:
         raise FileNotFoundError(f"No {filetype} file found for {station_id}")
 
 
 def load_combined(station_id: str) -> pd.DataFrame:
-    """Load combined file
+    """Load data for a combined file with station-id
 
     Arguments
     ---------
-    station_id : station ID
+    station_id : ID for station
 
     Return
     ------
     pandas.DataFrame
     """
-
-    fp = get_filepath(station_id, filetype="combined")
+    try:
+        fp = get_filepath(station_id, filetype="combined")
+    except ValueError as err:
+        print(err)
+    
     return pd.read_csv(fp, index_col=0, parse_dates=True, low_memory=False)
