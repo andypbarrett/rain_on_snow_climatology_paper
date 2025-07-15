@@ -136,6 +136,10 @@ def heatmap(
     ?
     """
 
+    # Use this to get y-ticks from pd.Series of countries indexed
+    # by station-id
+    # np.insert(country.sort_values().groupby(country).count().cumsum().values, 0, 0)
+    
     if not cbar_kwargs:
         cbar_kwargs = dict(
             shrink=0.5, 
