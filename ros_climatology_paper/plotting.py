@@ -180,5 +180,6 @@ def heatmap(
     ax.grid(which="major", axis="y", color='black')
 
     ax.get_figure().colorbar(img, **cbar_kwargs);
+    ax.get_figure().tight_layout()
 
     return ax
