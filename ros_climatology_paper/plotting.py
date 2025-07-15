@@ -9,6 +9,7 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
+from matplotlib.colors import Normalize, Colormap
 import matplotlib as mpl
 
 
@@ -151,6 +152,11 @@ def heatmap(
     df_scl = df.apply(minmax_scaler)
 
     ntime, nstation = df_scl.shape
+
+    norm = Normalize(vmin=0.001, vmax=1.)
+    if not isinstance(cmap, Colormap):
+        cmap = mpl.colormaps[cmap]
+    cmap.set_under("none")
     
     ax.set_xlim(*xlim)
     img = ax.imshow(df_scl.T.values,
@@ -159,7 +165,8 @@ def heatmap(
                     interpolation="none",
                     origin="lower", 
                     aspect=aspect,
-                    cmap=cmap)
+                    cmap=cmap,
+                    norm=norm)
 
     # ax.set_yticks(np.arange(nstation)+0.5, ptype_count_scl.columns, fontsize=5);
     ax.set_yticks(yticks)
