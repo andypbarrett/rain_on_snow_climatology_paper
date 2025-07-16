@@ -1,9 +1,12 @@
 """Loads datasets"""
-from typing import Tuple
+from typing import Tuple, List
 
 from pathlib import Path
 
 import pandas as pd
+import geopandas as gpd
+
+from ros_database.processing.surface import load_station_metadata
 
 
 DATAPATH = Path.home() / "src" / "rain_on_snow_climatology_paper" / "data"
@@ -81,3 +84,24 @@ def load_combined(station_id: str) -> pd.DataFrame:
         print(err)
     
     return pd.read_csv(fp, index_col=0, parse_dates=True, low_memory=False)
+
+
+def load_metadata(usecols: List[str]=None) -> gpd.GeoDataFrame:
+    """Returns a geopandas.GeoDataFrame containing AROSS data stations
+
+    Arguments
+    ---------
+    usecols : list of column names to load.  If None, will load
+              `["stid","station_name","latitude","longitude",
+              "elevation","country","ncei91"]` by default.
+
+    Returns
+    -------
+    geopandas.GeoDataFrame containing columns with point geometries
+    in WGS84 (EPSG:4326).
+    """
+    if not usecols:
+        usecols = ["stid","station_name","latitude","longitude",
+                   "elevation","country","ncei91"]
+        
+    return load_station_metadata(usecols=usecols)
