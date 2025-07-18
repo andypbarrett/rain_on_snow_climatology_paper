@@ -28,7 +28,16 @@ authors:
     roles: 
       conceptualization: lead
       writing: supporting
-      funding acquisition: lead  
+      funding acquisition: lead
+  - name: Zaria I. Cast
+    id: zic
+    orcid:
+    email:
+    affiliation:
+      - ref: nsidc
+    roles:
+      formal analysis: supporting
+      writing: supporting
 bibliography: references.bib
 abstract: >
   This study covers everything...
@@ -70,8 +79,11 @@ available.
 
 
 ## Introduction
-This is a simple placeholder for the manuscript's main document [@knuth84].
 
+- General statement about precipitation and precipitation types in the Arctic.
+- Introduce rain on snow events - Banks, etc - and impacts
+- Introduce rain on snow detection
+- Introduce database
 
 ## Data
 
@@ -85,6 +97,8 @@ Interactive Multisensor Snow and Ice Mapping System (IMS) for 1997 to present
 
 ERA5 snow cover for period before 1997.  Should we use ERA5-LAND or normal ERA5?
 
+## Description of database and processing
+
 
 ## Analysis
 
@@ -93,3 +107,6 @@ ERA5 snow cover for period before 1997.  Should we use ERA5-LAND or normal ERA5?
 
 
 ## Conclusions
+
+
+## References
