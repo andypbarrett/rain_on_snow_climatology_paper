@@ -40,42 +40,39 @@ authors:
       writing: supporting
 bibliography: references.bib
 abstract: >
-  This study covers everything...
+  Rain on Snow and other winter rain events have a significant impact on
+  Arctic ecosystems, animals and human inhabitants of the Arctic region.
+  When liquid precipitation falls on a cold snow pack and refreezes, it
+  creates ice layers that prevent reindeer, caribou and musk oxen from
+  foraging lichens and other food sources from under the snow pack.  Ice
+  layers also make on snow travel difficult for animals and people
+  alike.  Winter rains can also lead to icing events and cause
+  permafrost thaw.  Reports of rain on snow events and their impacts are
+  often anecdotal and most published reports are case studies.
+
+  In this paper, we use reports from Automated Surface Observing System
+  stations throughout the Arctic to document the frequency and spatial
+  patterns of rain on snow and winter rain events, and to evaluate
+  changes in the occurance of these events.  Automated Surface Observing
+  System stations provide Present Weather reports of precipitation type,
+  along with other meteorological conditions, at hourly or better
+  temporal frequencies for multiple sites throughout the Arctic region.
+  These observations were used to create a database of rain on snow and
+  other precipitation events.  The presence of snow on the ground is
+  determined from the Interactive Multisensor Snow and Ice Mapping
+  System from 2004 and from ERA5-Land snow cover fraction before 2004.
+  This enables liquid precipitation events when snow is on the ground to
+  be identified.  Combining in-situ data with remote sensing data
+  introduces some issues, especially in coastal locations where land-sea
+  masks do not have the spatial resolution required to include coastal
+  landforms where many airports are located.  We evaluate veracity and
+  spatial representativeness of the dataset against other remotely
+  sensed and in-situ meteorological observations where these are
+  available.
+
 license: "CC-BY"
 funding: "NSF"
 ---
-
-## Abstract
-
-Rain on Snow and other winter rain events have a significant impact on
-Arctic ecosystems, animals and human inhabitants of the Arctic region.
-When liquid precipitation falls on a cold snow pack and refreezes, it
-creates ice layers that prevent reindeer, caribou and musk oxen from
-foraging lichens and other food sources from under the snow pack.  Ice
-layers also make on snow travel difficult for animals and people
-alike.  Winter rains can also lead to icing events and cause
-permafrost thaw.  Reports of rain on snow events and their impacts are
-often anecdotal and most published reports are case studies.
-
-In this paper, we use reports from Automated Surface Observing System
-stations throughout the Arctic to document the frequency and spatial
-patterns of rain on snow and winter rain events, and to evaluate
-changes in the occurance of these events.  Automated Surface Observing
-System stations provide Present Weather reports of precipitation type,
-along with other meteorological conditions, at hourly or better
-temporal frequencies for multiple sites throughout the Arctic region.
-These observations were used to create a database of rain on snow and
-other precipitation events.  The presence of snow on the ground is
-determined from the Interactive Multisensor Snow and Ice Mapping
-System from 2004 and from ERA5-Land snow cover fraction before 2004.
-This enables liquid precipitation events when snow is on the ground to
-be identified.  Combining in-situ data with remote sensing data
-introduces some issues, especially in coastal locations where land-sea
-masks do not have the spatial resolution required to include coastal
-landforms where many airports are located.  We evaluate veracity and
-spatial representativeness of the dataset against other remotely
-sensed and in-situ meteorological observations where these are
-available.
 
 
 ## Introduction
