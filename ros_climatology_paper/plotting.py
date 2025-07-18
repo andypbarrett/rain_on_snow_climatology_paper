@@ -10,8 +10,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 from matplotlib.colors import Normalize, Colormap
-import matplotlib as mpl
+from matplotlib.lines import Line2D
 
+import matplotlib as mpl
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+
+PROJECTIONS = {
+    # NSIDC WGS84 North Polar Stereographic CRS (EPSG:3413)
+    "stereographic": ccrs.Stereographic(
+        central_latitude=90., 
+        central_longitude=0.,
+        true_scale_latitude=70.
+    ),
+    # Simple Polar Azimuthal Orthographic - used by Zaria
+    "orthographic": ccrs.Orthographic(
+        central_latitude=90.,
+        central_longitude=0.
+    )
+}
 
 def doy_month_ticks_and_labels(month_start=1, which="major", with_labels=True):
     """Returns ticks and labels for months when axis is day-of-year"""
@@ -187,3 +204,118 @@ def heatmap(
     ax.get_figure().tight_layout()
 
     return ax
+
+
+def datamap(data,
+            column: str=None,
+            kind: str="points",
+            projection: Union[str, ccrs.Projection]=None,
+            extent: List[float]=None,
+            fig: plt.Figure=None,
+            color: str="0.3",
+            cmap: str=None,
+            norm: Normalize=None,
+            alpha: float=None,
+            vmin: float=None,
+            vmax: float=None,
+            legend_title: str=None):
+    """Generates a map showing data in column
+
+    Arguments
+    ---------
+    data : geopandas.GeoDataFrame
+    column : name of column containing data to plot
+    projection : either name of one of named projections (see below) or 
+                 cartopy.crs.Projection object.
+    extent : map extent as list with [min_lon, max_lon, min_lat, max_lat],
+             default is [-180,180,55,90]
+    fig : matplotlb.Figure, with use current figure otherwise.
+
+    Returns
+    -------
+    matplotlib.Figure and matplotlib.Axes objects
+    """
+
+    if not projection:
+        projection = PROJECTIONS["orthographic"]
+
+    if isinstance(projection, str):
+        try:
+            projection = PROJECTIONS[projection]
+        except KeyError:
+            print(f"Expected one of {', '.join(PROJECTIONS.keys())}, "
+                  f"got {projection} instead.  Alternatively, supply "
+                  "cartopy.crs.Projection instead")
+            return
+
+    if not extent:
+        extent = [-180., 180., 55., 90.]
+
+    if not fig:
+        fig = plt.gcf()
+
+    if not vmin:
+        vmin = data[column].min()
+
+    if not vmax:
+        vmax = data[column].max()
+        
+    if not norm:
+        norm = Normalize(vmin=vmin, vmax=vmax)
+
+    if not legend_title:
+        legend_title=column
+
+    max_ms = 200
+    
+    if kind == "symbols":
+        kwargs = dict(
+#            ax=ax,
+            column=column,
+            cmap = cmap,
+            markersize=None,
+            legend=True,
+            legend_kwds=dict(shrink=0.75, label=legend_title),
+            )
+    elif kind == "proportional":
+        if not alpha: alpha=0.5
+        kwargs = dict(
+#            ax=ax,
+            markersize=norm(data[column])*max_ms,
+            color=color,
+            alpha=alpha,
+            )
+    else:
+        kwargs = dict(
+#            ax=ax,
+            color=color,
+            markersize=None,
+            alpha=alpha,
+            )
+    
+    ax = fig.add_subplot(projection=projection)
+    ax.set_extent(extent, ccrs.PlateCarree())
+    ax.add_feature(cfeature.OCEAN)
+    ax.add_feature(cfeature.LAND)
+
+    data.to_crs(projection.to_wkt()).plot(ax=ax, **kwargs)
+    
+    # add legend
+    if kind == "proportional":
+        legend_symbols = np.array([40, 30, 20, 10])
+        # markersize for scatter is set to points squared
+        # Line2D sets marker size in points.  To match markersize in legend and on plot
+        # the markersize passed to Line2D must be given as the squareroot.
+        # This raises the question of what the correct size to pass to scatter.  I think passing
+        # s is correct because I want the symbols to be proportional to s.
+        s_legend = np.sqrt(((legend_symbols - vmin) * max_ms / (vmax - vmin)))
+        legend_elements = [Line2D([0], [0], linestyle='', marker='o',
+                                  color='0.3', label=f"{symbol}",
+                                  markersize=size, alpha=0.5)
+                           for symbol, size in zip(legend_symbols, s_legend)]
+        ax.legend(handles=legend_elements, loc='upper right',
+                  markerscale=1., title=legend_title)
+
+    return fig, ax
+
+
